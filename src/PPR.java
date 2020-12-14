@@ -9,7 +9,6 @@ public class PPR extends Parser{
 	public void parse() {
 		// TODO Auto-generated method stub
 		analisaPrograma();
-		
 	}
 	
 	public boolean analisaPrograma() {
@@ -31,16 +30,16 @@ public class PPR extends Parser{
 							return true;
 						}
 					} else {
-						erro("Bloco principal nao encontrado");
+						return erro("Bloco principal nao encontrado");
 					}
 				} else {
-					erro("Ponto e virgula esperado");
+					return erro("Ponto e virgula esperado");
 				}
 			} else {
-				erro("Identificador esperado");
+				return erro("Identificador esperado");
 			}
 		}
-		erro("Programa não declarado");
+		return erro("Programa não declarado");
 	}
 
 	private boolean analisaBloco() {
@@ -48,20 +47,79 @@ public class PPR extends Parser{
 		//analisaEtVariaveis();
 		//analisaSubRotinas();
 		analisaComandos();
-		return false;
+		return true;
 	}
 	
-	private void analisaComandos() {
-		
-		
+	private boolean analisaComandos() {
+		if(token.tipo == TipoToken.SINICIO) {
+			buscaToken();
+			analisaComandoSimples();
+			while(token.tipo != TipoToken.SFIM) {
+				if(token.tipo == TipoToken.SPONTO_E_VIRGULA) {
+					buscaToken();
+					if(token.tipo != TipoToken.SFIM) {
+						return analisaComandoSimples();
+					}
+					return true;
+				} else {
+					return erro("Ponto e virgula esperado");
+				}
+			}
+			buscaToken();
+			return true;
+		} else {
+			return erro("Programa não iniciado");
+		}
+	}
+	
+	private boolean analisaComandoSimples() {
+		if(token.tipo == TipoToken.SIDENTIFICADOR) {
+			return analisaAtribuicao();
+		} else if(token.tipo == TipoToken.SESCREVA) {
+			return analisaEscreva();
+		} else {
+			return analisaComandos();
+		}
+	}
+	
+	private boolean analisaAtribuicao() {
+		buscaToken();
+		if(token.tipo == TipoToken.SATRIBUICAO) {
+			// ANALISAR ATRIBUIÇÃO ATÉ O FIM
+			return analisaAtribuicao();
+		} else {
+			return erro("Atribuição esperada");
+		}
+	}
+	
+	private boolean analisaEscreva() {
+		buscaToken();
+		if(token.tipo == TipoToken.SABRE_PARENTESIS) {
+			buscaToken();
+			if(token.tipo == TipoToken.SIDENTIFICADOR) {
+				Chave chave = new Chave(token.escopo, token.tipo, token.lexema);
+				if(ts.getToken(chave) != null) {
+					buscaToken();
+					if(token.tipo == TipoToken.SFECHA_PARENTESIS) {
+						buscaToken();
+						return true;
+					} else {
+						return erro("Fecha parentesis esperado");
+					}
+				} else {
+					return erro("Identificador não encontrado");
+				}
+			} else {
+				return erro("Identificador esperado");
+			}
+		} else {
+			return erro("Abre parentesis esperado");
+		}
 	}
 
-	private void analisaSubRotinas() {
-		// TODO Auto-generated method stub
-		
-	}
 
-	private void analisaEtVariaveis() {
+	// ANALISAR
+	private boolean analisaEtVariaveis() {
 		if(token.tipo == TipoToken.SVAR) {
 			buscaToken();
 			if(token.tipo == TipoToken.SIDENTIFICADOR) {
@@ -69,20 +127,22 @@ public class PPR extends Parser{
 					analisaVariaveis();
 					if(token.tipo == TipoToken.SPONTO_E_VIRGULA) {
 						buscaToken();
+						return true;
 					} else {
-						erro("Ponto e virgula esperado");
+						return erro("Ponto e virgula esperado");
 					}
 				}
 			} else {
-				erro("Identificador esperado");
+				return erro("Identificador esperado");
 			}
-			
+		} else {
+			return true;
 		}
+		return false;
 	}
 
 	private void analisaVariaveis() {
 		// TODO Auto-generated method stub
-		
 	}
 	
 	

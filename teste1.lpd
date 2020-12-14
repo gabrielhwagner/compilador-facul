@@ -1,6 +1,5 @@
-programa calcula2_expressao;
-
 programa teste;
+
 var x: inteiro;
 inicio
 	x := 3;
