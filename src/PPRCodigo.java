@@ -1,7 +1,7 @@
 
-public class PPR extends Parser{
+public class PPRCodigo extends Parser{
 
-	public PPR(String arquivo) {
+	public PPRCodigo(String arquivo) {
 		super();
 		lexico.analisa(arquivo);
 	}
@@ -186,5 +186,7 @@ public class PPR extends Parser{
 	}
 	
 	
-
+	public void geraCod(String comando) {
+		codigo += comando + "\n";
+	}
 }

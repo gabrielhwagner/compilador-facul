@@ -4,6 +4,8 @@ public abstract class Parser {
 	TabelaSimbolos ts;
 	LexicoDois lexico;
 	Token token;
+	String codigo;
+	int temp = 1;
 
 	public Parser() {
 		ts = new TabelaSimbolos();
@@ -23,7 +25,7 @@ public abstract class Parser {
 	}
 	
 	
-	//Analise Semântica
+	//Analise Semï¿½ntica
 	public Token buscaDuplicidade() { //vai receber o token, mas como comparar
 		token = lexico.buscaToken();
 		return token;

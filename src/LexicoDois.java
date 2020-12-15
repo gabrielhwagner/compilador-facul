@@ -100,7 +100,7 @@ public class LexicoDois {
 					col = coluna;
 					if 		(ch == '{') estado = 16;
 					else if (ch == ':') estado = 1;
-					
+					else if (ch == ',') return new Token(TipoToken.SVIRGULA, ",", linha, col, "programa");
 					// Operações de calculo
 					else if (ch == '+') return new Token(TipoToken.SMAIS, "+", linha, col, "programa");
 					else if (ch == '-') return new Token(TipoToken.SMENOS, "-", linha, col, "programa");
