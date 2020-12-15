@@ -147,8 +147,7 @@ public class PPR extends Parser{
 	private void analisaVariaveis() {
 		do {
 			if(token.tipo == TipoToken.SIDENTIFICADOR) {
-				Chave chave = new Chave(token.escopo, token.tipo, token.lexema);
-                Boolean duplicado = ts.getToken(chave) != null;
+                Boolean duplicado = ts.getToken(token) != null;
                 if(!duplicado) { 
                 	ts.addToken(token);
                     buscaToken();

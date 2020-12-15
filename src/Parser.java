@@ -4,7 +4,7 @@ public abstract class Parser {
 	TabelaSimbolos ts;
 	LexicoDois lexico;
 	Token token;
-	String codigo;
+	String codigo = "";
 	int temp = 1;
 
 	public Parser() {

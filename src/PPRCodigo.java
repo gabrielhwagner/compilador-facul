@@ -21,7 +21,7 @@ public class PPRCodigo extends Parser{
 			
 			if(token.tipo == TipoToken.SIDENTIFICADOR) {
 				System.out.println(token.tipo + ": " + token.lexema + " ");
-				ts.addToken(token);
+				//ts.addToken(token);
 				buscaToken();
 				
 				if(token.tipo == TipoToken.SPONTO_E_VIRGULA) {
@@ -103,10 +103,10 @@ public class PPRCodigo extends Parser{
 		if(token.tipo == TipoToken.SABRE_PARENTESIS) {
 			buscaToken();
 			if(token.tipo == TipoToken.SIDENTIFICADOR) {
-				Chave chave = new Chave(token.escopo, token.tipo, token.lexema);
-				// desfazer deppois
-				// ts.getToken(chave) != null
-				if(true) {
+				// Verifica se o identificador foi declarado
+				if(ts.getToken(token) != null) {
+					// Declara o printf
+					geraCod("call i32 (i8*, ...) @printf( i8* " + token.codigo +" ) nounwind");
 					buscaToken();
 					if(token.tipo == TipoToken.SFECHA_PARENTESIS) {
 						buscaToken();
@@ -149,10 +149,13 @@ public class PPRCodigo extends Parser{
 	private void analisaVariaveis() {
 		do {
 			if(token.tipo == TipoToken.SIDENTIFICADOR) {
-				Chave chave = new Chave(token.escopo, token.tipo, token.lexema);
-                Boolean duplicado = ts.getToken(chave) != null;
+				// Verifica se ja nao tem o identificador com o mesmo nome
+                Boolean duplicado = ts.getToken(token) != null;
                 if(!duplicado) { 
+                	// Se nao tiver, gera uma variavel e salva na tabela de simbolos
+                	token.codigo = geraTemp();
                 	ts.addToken(token);
+                	
                     buscaToken();
                     if((token.tipo == TipoToken.SVIRGULA) || (token.tipo == TipoToken.STIPO)){
                         if(token.tipo == TipoToken.SVIRGULA) {

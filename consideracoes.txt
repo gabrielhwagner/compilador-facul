@@ -1,0 +1,20 @@
+O compilador não está 100% implementado;
+Tivemos algumas dificuldades para conclusão:
+
+- A analise sintatica baseada na apostila de LPD apresentou algumas falhas, possivelmente erro na nossa tradução do "portugol" para o java,
+onde alguns erros não sao identificados corretamente. O programa base que esta no arquivo teste1.lpd consegue ser lido tranquilamente, possibilitando
+declarar mais variaveis na mesma linha, etc;
+
+- Na analise semantica tivemos um problema com a tabela de simbolos, onde quando é feito o get passando a chave, ela sempre retorna null, mesmo passando a mesma chave,
+isso impediu que funcionasse a analise de variaveis com mesmo nome.
+ 	Boolean duplicado = ts.getToken(token) != null;
+Sempre retorna null
+
+- Na geracao de codigo implementamos somente algumas partes, pois nao conseguimos entender o codigo llvm, e devido ao problema acima (get na tabela de simbolos),
+impediu que pegassemos o codigo do token para passar pro codigo de maquina, onde a gente ia atribuir algum valor para variavel ja criada.
+
+token.codigo = geraTemp();
+ts.addToken(token);
+
+O valor da variavel ia ser atribuido na função analisaAtribuicao, onde a ideia era pegar o codigo do token para setar no comando
+store i32 3(valor para atribuir), i32* %ptr(codigo do token).
