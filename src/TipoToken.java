@@ -10,6 +10,7 @@ public enum TipoToken {
 	SINTEIRO,				//inteiro
 	SBOOLEANO,				//booleano
 	SPONTO_E_VIRGULA, 		//;
+	SVIRGULA, 		        //,
 	SPONTO,					//.
 	SMAIS,					//+
 	SMENOS,					//-
