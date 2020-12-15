@@ -1,6 +1,6 @@
 programa teste;
 
-var x, x: inteiro;
+var x: inteiro;
 
 inicio
   x := 3 + 1336;

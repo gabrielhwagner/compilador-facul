@@ -11,13 +11,13 @@ public class TabelaSimbolos {
 	public void addToken(Token t) {
 		Chave chave = new Chave(t.escopo, t.tipo, t.lexema);
 		lt.put(chave, t);
-		System.out.println("1 " + lt.containsKey(chave));
+		System.out.println("Add " + lt.containsKey(chave));
 	}
 	
 	public Token getToken(Token t) {
 		Chave chave = new Chave(t.escopo, t.tipo, t.lexema);
 		
-		System.out.println("2 " + lt.containsKey(chave));
+		System.out.println("Get " + lt.containsKey(chave));
 		return lt.get(chave);
 	}
 }

@@ -2,7 +2,6 @@
 ; Function Attrs; noinline nounwind optnone uwtable 
 define dso_local i32 @main() #0 { 
 %1 = alloca i32, align 4
-%2 = alloca i32, align 4
 call i32 (i8*, ...) @printf( i8* null ) nounwind
 }
 declare dso_local i32 @printf(i8*, ...) #1

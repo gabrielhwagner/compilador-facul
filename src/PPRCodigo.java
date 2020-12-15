@@ -21,7 +21,7 @@ public class PPRCodigo extends Parser{
 			
 			if(token.tipo == TipoToken.SIDENTIFICADOR) {
 				System.out.println(token.tipo + ": " + token.lexema + " ");
-				//ts.addToken(token);
+				ts.addToken(token);
 				buscaToken();
 				
 				if(token.tipo == TipoToken.SPONTO_E_VIRGULA) {
@@ -104,7 +104,8 @@ public class PPRCodigo extends Parser{
 			buscaToken();
 			if(token.tipo == TipoToken.SIDENTIFICADOR) {
 				// Verifica se o identificador foi declarado
-				if(ts.getToken(token) != null) {
+				//ts.getToken(token) != null
+				if(true) {
 					// Declara o printf
 					geraCod("call i32 (i8*, ...) @printf( i8* " + token.codigo +" ) nounwind");
 					buscaToken();
@@ -153,6 +154,7 @@ public class PPRCodigo extends Parser{
                 Boolean duplicado = ts.getToken(token) != null;
                 if(!duplicado) { 
                 	// Se nao tiver, gera uma variavel e salva na tabela de simbolos
+                	// criar codigo de alocacao de variavel
                 	token.codigo = geraTemp();
                 	ts.addToken(token);
                 	
