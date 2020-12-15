@@ -13,7 +13,7 @@ public abstract class Parser {
 	public abstract void parse();
 	
 	public Token buscaToken() {
-		token = lexico.buscaToken();
+		token = lexico.busca();
 		return token;
 	}
 	

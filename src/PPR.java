@@ -1,13 +1,13 @@
 
 public class PPR extends Parser{
 
-	public PPR() {
+	public PPR(String arquivo) {
 		super();
+		lexico.analisa(arquivo);
 	}
 	
 	@Override
 	public void parse() {
-		// TODO Auto-generated method stub
 		analisaPrograma();
 	}
 	
@@ -58,9 +58,10 @@ public class PPR extends Parser{
 				if(token.tipo == TipoToken.SPONTO_E_VIRGULA) {
 					buscaToken();
 					if(token.tipo != TipoToken.SFIM) {
-						return analisaComandoSimples();
+						analisaComandoSimples();
+					} else {						
+						return true;
 					}
-					return true;
 				} else {
 					return erro("Ponto e virgula esperado");
 				}
@@ -86,7 +87,11 @@ public class PPR extends Parser{
 		buscaToken();
 		if(token.tipo == TipoToken.SATRIBUICAO) {
 			// ANALISAR ATRIBUIÇÃO ATÉ O FIM
-			return analisaAtribuicao();
+			while(token.tipo != TipoToken.SPONTO_E_VIRGULA) {
+				buscaToken();
+			}
+			return true;
+			//return analisaAtribuicao();
 		} else {
 			return erro("Atribuição esperada");
 		}
@@ -98,7 +103,9 @@ public class PPR extends Parser{
 			buscaToken();
 			if(token.tipo == TipoToken.SIDENTIFICADOR) {
 				Chave chave = new Chave(token.escopo, token.tipo, token.lexema);
-				if(ts.getToken(chave) != null) {
+				// desfazer deppois
+				// ts.getToken(chave) != null
+				if(true) {
 					buscaToken();
 					if(token.tipo == TipoToken.SFECHA_PARENTESIS) {
 						buscaToken();

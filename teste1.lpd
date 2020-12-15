@@ -1,8 +1,8 @@
 programa teste;
 
 var x: inteiro;
+
 inicio
-	x := 3;
-	x := x + 1;
-	escreva(x);
+  x := 3 + 1336;
+  escreva(x);
 fim.

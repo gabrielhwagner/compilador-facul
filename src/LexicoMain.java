@@ -11,26 +11,14 @@ public class LexicoMain {
 
 	public static void main(String[] args) {
 		//Cria HashMap de tokens
-		TabelaSimbolos lt = new TabelaSimbolos();
+		//List lt = new Arraylist<Token>();
 		
 		//Cria instancia da classe analisador léxico
-		LexicoDois lexico = new LexicoDois();
-		
+		PPR ppr = new PPR("teste1.lpd");
+		ppr.parse();
 		//Realiza a análise léxica
-		lt = lexico.analisa("teste1.lpd");
-		
-		//Imprime número de tokens
-		System.out.println("Número de tokens: " +lt.lt.size());
-	
-		//Percorre o HashMap de tokens imprimindo-os os valores
-		for (Map.Entry<Chave, Token> token : lt.lt.entrySet()) {
-		     System.out.println(token.getValue()); 
-		}
-		
-		System.out.println("Tipos de token:");
-		
-		//Imprime o enum de tipo de tokens
-		System.out.println(Arrays.toString(TipoToken.values()));
+		//lt = lexico.analisa("teste1.lpd");
+
 		
 	}
 

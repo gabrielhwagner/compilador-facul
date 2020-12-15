@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PushbackReader;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class LexicoDois {
 	
@@ -14,7 +16,7 @@ public class LexicoDois {
 	 */
 	PushbackReader r;
 	
-	HashMap<String, Token> lt;
+	List<Token> lt;
 	
 	/*
 	 * Codigo do caracter sendo analisado
@@ -229,10 +231,10 @@ public class LexicoDois {
 	/*
 	 * Abre o arquivo e percorre cada caracter
 	 */
-	public TabelaSimbolos analisa (String arquivo) {
+	public void analisa (String arquivo) {
 		
 		// Cria um hashMap para salvar cada token
-		TabelaSimbolos lt = new TabelaSimbolos();
+		lt = new ArrayList<Token>();
 		
 		try {
 			// Abre o arquivo
@@ -262,9 +264,13 @@ public class LexicoDois {
 			Token t = buscaToken();
 			
 			// Seta no hashMap o token retornado
-			lt.addToken(t);
+			lt.add(t);
 		}
-		
-		return lt;
+	}
+	
+	public Token busca() {
+		Token token = lt.get(0);
+		lt.remove(0);
+		return token;
 	}
 }
