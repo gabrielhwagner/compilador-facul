@@ -45,15 +45,10 @@ public class PPR extends Parser{
 
 	private boolean analisaBloco() {
 		buscaToken();
-		//analisaEtVariaveis();
+		analisaEtVariaveis();
 		//analisaSubRotinas();
-		analisaComandos();
+		//analisaComandos();
 		return false;
-	}
-	
-	private void analisaComandos() {
-		
-		
 	}
 
 	private void analisaSubRotinas() {
@@ -75,17 +70,59 @@ public class PPR extends Parser{
 				}
 			} else {
 				erro("Identificador esperado");
-			}
-			
+			}			
 		}
 	}
 
 	private void analisaVariaveis() {
-		// TODO Auto-generated method stub
-		
+		while(token.tipo == TipoToken.SDOISPONTOS) {
+			if(token.tipo == TipoToken.SIDENTIFICADOR) {
+				boolean duplicado = !buscaDuplicidade(token.lexema); //Parte Semântica - todd
+				if(!duplicado) { 
+					ts.addToken(token);
+					buscaToken();
+					if((token.tipo == TipoToken.SVIRGULA) || (token.tipo == TipoToken.SDOISPONTOS)){
+						if(token.tipo == TipoToken.SVIRGULA) {
+							buscaToken();
+							if(token.tipo == TipoToken.SDOISPONTOS) {
+								erro("Não se usa dois pontos depois de uma vírgula.");
+							}
+						} else {
+							erro("O símbolo não é uma vírgula.");
+						}
+					}				
+				} else {
+					erro("Existe duplicidade de símbolos.");
+				}
+			} else {
+				erro("Não é um identificador.");
+			}
+			buscaToken();
+			analisaTipo();
+		}		
+	}
+
+	private void analisaComandos() {
+		if(token.tipo == TipoToken.SVAR) {
+			buscaToken();
+			if(token.tipo == TipoToken.SIDENTIFICADOR) {
+				while(token.tipo == TipoToken.SIDENTIFICADOR) {
+					analisaVariaveis();
+					if(token.tipo == TipoToken.SPONTO_E_VIRGULA) {
+						buscaToken();
+					} else {
+						erro("Ponto e virgula esperado");
+					}
+				}
+			} else {
+				erro("Identificador esperado");
+			}			
+		}
 	}
 	
-	
+	private void analisaTipo() {
+		
+	}
 	
 	
 
