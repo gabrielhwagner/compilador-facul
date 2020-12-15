@@ -24,4 +24,5 @@ Arquivos:
 	<li><b>TipoToken: </b> Enum com os tipos dos tokens existentes</li>
 	<li><b>Token: </b> Classe para criacao de um token</li>
 	<li><b>teste1: </b> Codigo em lpd</li>
+	<li><b>codigo.ll: </b> Codigo gerado em llvm</li>
 </ul>
