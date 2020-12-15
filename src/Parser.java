@@ -24,10 +24,4 @@ public abstract class Parser {
 		return false;
 	}
 	
-	
-	//Analise Sem�ntica
-	public Token buscaDuplicidade() { //vai receber o token, mas como comparar
-		token = lexico.buscaToken();
-		return token;
-	}
 }

@@ -93,7 +93,7 @@ public class PPRCodigo extends Parser{
 			//store i32 3, i32* %ptr
 			
 			// Codigo para somar
-			//%a = add i32 4, %ptr
+			//%a = add i32 1336, %ptr
 			
 			while(token.tipo != TipoToken.SPONTO_E_VIRGULA) {
 				buscaToken();
