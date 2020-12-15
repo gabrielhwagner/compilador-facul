@@ -9,6 +9,8 @@ public class PPRCodigo extends Parser{
 	@Override
 	public void parse() {
 		analisaPrograma();
+		
+		salvaCodigo();
 	}
 	
 	public boolean analisaPrograma() {
@@ -185,8 +187,20 @@ public class PPRCodigo extends Parser{
 		}
 	}
 	
+	public String geraTemp() {
+		Integer i = temp++;
+		String nome = '%' + i.toString();
+		geraCod(nome + " = alloca i32, align 4");
+		return nome;
+	}
+	
 	
 	public void geraCod(String comando) {
 		codigo += comando + "\n";
+	}
+	
+	public void salvaCodigo() {
+		CodIntermediario cod = new CodIntermediario(temp, codigo);
+		cod.geraLLVMIR();
 	}
 }

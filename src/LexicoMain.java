@@ -14,7 +14,7 @@ public class LexicoMain {
 		//List lt = new Arraylist<Token>();
 		
 		//Cria instancia da classe analisador léxico
-		PPR ppr = new PPR("teste1.lpd");
+		PPRCodigo ppr = new PPRCodigo("teste1.lpd");
 		ppr.parse();
 		//Realiza a análise léxica
 		//lt = lexico.analisa("teste1.lpd");

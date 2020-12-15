@@ -11,8 +11,6 @@ public class CodIntermediario {
 	public CodIntermediario(int t, String cod) {
 		temp = t;
 		codigo = cod;
-		
-		geraLLVMIR();
 	}
 	
 	public String geraPreambulo() {
