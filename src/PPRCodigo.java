@@ -88,6 +88,13 @@ public class PPRCodigo extends Parser{
 		buscaToken();
 		if(token.tipo == TipoToken.SATRIBUICAO) {
 			// ANALISAR ATRIBUIÇÃO ATÉ O FIM
+			
+			// Codigo para atribuir o valor na variavel
+			//store i32 3, i32* %ptr
+			
+			// Codigo para somar
+			//%a = add i32 4, %ptr
+			
 			while(token.tipo != TipoToken.SPONTO_E_VIRGULA) {
 				buscaToken();
 			}
